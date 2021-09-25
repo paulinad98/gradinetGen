@@ -1,10 +1,14 @@
 const angleInput = document.getElementById("angle");
+const angleInputs = document.querySelectorAll(".angle");
 const backgroundGradient = document.getElementById("gradient");
 const supriseBtn = document.getElementById("suprise");
 const colorCounter = document.getElementById("count-color");
 const colorsContainer = document.getElementById("colors");
 const generateBtn = document.getElementById("gen");
+const copyCode = document.getElementById("copy-code");
+const radialBtn = document.querySelector(".radial");
 let colorPercent, gradientAngle, colors, splitersContainer;
+let gradientMode = "linear";
 let arrOfColors = [];
 let arrOfSplitters = [];
 let howManyColors = 2;
@@ -16,10 +20,15 @@ setGradient();
 function doGradient() {
   let gradientText = "";
   for (let i = 0; i < howManyColors; i++) {
-    gradientText += ` ,${arrOfColors[i]} ${arrOfSplitters[i]}%`;
+    gradientText += `,${arrOfColors[i]} ${arrOfSplitters[i]}%`;
   }
-  console.log(gradientText);
-  backgroundGradient.style.background = `linear-gradient(${gradientAngle}deg ${gradientText})`;
+
+  if (gradientMode === "linear") {
+    backgroundGradient.style.background = `${gradientMode}-gradient(${gradientAngle}deg ${gradientText})`;
+  } else {
+    backgroundGradient.style.background = `${gradientMode}-gradient(circle ${gradientText})`;
+  }
+  copyCode.textContent = `background: ${backgroundGradient.style.background}`;
 }
 
 function randomColor() {
@@ -83,6 +92,19 @@ colorCounter.addEventListener("change", () => {
   howManyColors = colorCounter.value;
   createColorInputs();
   setColor();
+});
+
+radialBtn.addEventListener("click", () => {
+  if (!radialBtn.classList.contains("clicked")) {
+    radialBtn.classList.add("clicked");
+    gradientMode = "linear";
+    angleInputs.forEach((obj) => obj.classList.remove("clicked"));
+  } else {
+    radialBtn.classList.remove("clicked");
+    gradientMode = "radial";
+    angleInputs.forEach((obj) => obj.classList.add("clicked"));
+  }
+  setGradient();
 });
 
 angleInput.addEventListener("click", setGradient);

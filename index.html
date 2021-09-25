@@ -14,22 +14,42 @@
   </head>
   <body>
     <form id="gradient" class="gradient">
-      <label for="count-color">How many colors:</label>
-      <input type="number" id="count-color" name="count-color" value="2" />
+      <div class="number-of-colors">
+        <label for="count-color">How many colors:</label>
+        <input type="number" id="count-color" name="count-color" value="2" />
+      </div>
       <div id="colors"></div>
-      <label for="angle">Gradient angle:</label>
-      <input
-        value="90"
-        type="range"
-        id="angle"
-        name="angle"
-        min="0"
-        max="360"
-      />
+      <div class="gradient-mode">
+        <label for="angle" class="angle">Gradient angle:</label>
+        <input
+          value="90"
+          type="range"
+          id="angle"
+          class="angle"
+          name="angle"
+          min="0"
+          max="360"
+        />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-circle radial clicked"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+          />
+        </svg>
+      </div>
+
       <button id="gen">Generate</button>
       <button id="suprise">Suprise me!</button>
-      <p>By Paulina :)</p>
     </form>
+    <main>
+      <p id="copy-code"></p>
+    </main>
     <script src="index.js"></script>
   </body>
 </html>

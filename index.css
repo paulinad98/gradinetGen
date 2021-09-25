@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
@@ -9,22 +13,26 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-size: 25px;
   font-family: "Karla", sans-serif;
+  background-color: gray;
+  background: radial-gradient(black, white);
 }
 
 .gradient {
+  max-width: 800px;
+  width: 80%;
   box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
   background-color: #b5caf9;
-  padding: 2.5em;
+  padding: 2em;
   border-radius: 5px;
+  margin-top: 1em;
 }
 
 input {
   cursor: pointer;
-  margin: 10px;
+  margin: 20px;
 }
 
 input[type="color"] {
@@ -33,6 +41,14 @@ input[type="color"] {
     rgba(17, 17, 26, 0.1) 0px 0px 8px;
   height: 30px;
   width: 100px;
+}
+
+input[type="number"] {
+  width: 40px;
+}
+
+.number-of-colors {
+  text-align: center;
 }
 
 button {
@@ -50,6 +66,50 @@ button:hover {
   background-color: #ffffff;
 }
 
+#colors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  opacity: 0.8;
+}
+
+.gradient-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  width: 100%;
+}
+
 p {
-  text-align: right;
+  width: 80%;
+  margin: 1em auto;
+  font-size: 1rem;
+  border: 1px solid black;
+  padding: 1em 3em;
+  background-color: rgb(250, 233, 233);
+  color: rgb(240, 89, 67);
+}
+
+.radial {
+  cursor: pointer;
+  width: 40px;
+  height: auto;
+  background-color: whitesmoke;
+  padding: 0.1em;
+  border-radius: 20%;
+  color: black;
+}
+
+.clicked {
+  opacity: 0.7;
+  color: gray;
+}
+
+.angle.clicked {
+  color: gray;
+  opacity: 0.4;
 }
