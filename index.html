@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Karla:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <form id="gradient" class="gradient">
+      <label for="count-color">How many colors:</label>
+      <input type="number" id="count-color" name="count-color" value="2" />
+      <div id="colors"></div>
+      <label for="angle">Gradient angle:</label>
+      <input
+        value="90"
+        type="range"
+        id="angle"
+        name="angle"
+        min="0"
+        max="360"
+      />
+      <button id="gen">Generate</button>
+      <button id="suprise">Suprise me!</button>
+    </form>
+    <script src="index.js"></script>
+  </body>
+</html>
