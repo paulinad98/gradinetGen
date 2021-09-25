@@ -37,5 +37,19 @@ input[type="color"] {
 
 button {
   display: block;
+  width: 200px;
+  border: 1px black solid;
+  border-radius: 5em;
+  padding: 0.1em;
+  color: grey;
   margin: 1em auto;
+}
+
+button:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+p {
+  text-align: right;
 }
