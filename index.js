@@ -1,21 +1,75 @@
 const angleInput = document.getElementById("angle");
-const angleInputs = document.querySelectorAll(".angle");
-const backgroundGradient = document.getElementById("gradient");
+const angleInputLabels = document.querySelectorAll(".angle");
+const backgroundGradientGrid = document.getElementById("gradient");
 const supriseBtn = document.getElementById("suprise");
 const colorCounter = document.getElementById("count-color");
 const colorsContainer = document.getElementById("colors");
 const generateBtn = document.getElementById("gen");
 const copyCode = document.getElementById("copy-code");
 const radialBtn = document.querySelector(".radial");
-let colorPercent, gradientAngle, colors, splitersContainer;
+let colorPercent, gradientAngle, colorInputs, splitersContainer;
 let gradientMode = "linear";
 let arrOfColors = [];
 let arrOfSplitters = [];
 let howManyColors = 2;
 
+//start display
 setColor();
 createColorInputs();
 setGradient();
+
+supriseBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  howManyColors = Math.floor(Math.random() * 8 + 2);
+  colorCounter.value = howManyColors;
+  setColor();
+  createColorInputs();
+  for (let i = 0; i < howManyColors; i++) {
+    colorInputs[i].value = randomColor();
+    splitersContainer[i].value = Math.floor(
+      Math.random() * 100 + splitersContainer[i].value
+    );
+  }
+  angleInput.value = Math.floor(Math.random() * 360);
+  setGradient();
+});
+
+generateBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  setGradient();
+});
+
+colorCounter.addEventListener("change", () => {
+  howManyColors = colorCounter.value;
+  createColorInputs();
+  setColor();
+  setGradient();
+});
+
+radialBtn.addEventListener("click", () => {
+  if (!radialBtn.classList.contains("clicked")) {
+    radialBtn.classList.add("clicked");
+    gradientMode = "linear";
+    angleInputLabels.forEach((obj) => obj.classList.remove("clicked"));
+  } else {
+    radialBtn.classList.remove("clicked");
+    gradientMode = "radial";
+    angleInputLabels.forEach((obj) => obj.classList.add("clicked"));
+  }
+  setGradient();
+});
+
+angleInput.addEventListener("click", setGradient);
+
+function setGradient() {
+  arrOfColors = [];
+  for (let i = 0; i < howManyColors; i++) {
+    arrOfColors[i] = colorInputs[i].value;
+    arrOfSplitters[i] = splitersContainer[i].value;
+  }
+  gradientAngle = angleInput.value;
+  doGradient();
+}
 
 function doGradient() {
   let gradientText = "";
@@ -24,15 +78,11 @@ function doGradient() {
   }
 
   if (gradientMode === "linear") {
-    backgroundGradient.style.background = `${gradientMode}-gradient(${gradientAngle}deg ${gradientText})`;
+    backgroundGradientGrid.style.background = `${gradientMode}-gradient(${gradientAngle}deg ${gradientText})`;
   } else {
-    backgroundGradient.style.background = `${gradientMode}-gradient(circle ${gradientText})`;
+    backgroundGradientGrid.style.background = `${gradientMode}-gradient(circle ${gradientText})`;
   }
-  copyCode.textContent = `background: ${backgroundGradient.style.background}`;
-}
-
-function randomColor() {
-  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+  copyCode.textContent = `background: ${backgroundGradientGrid.style.background}`;
 }
 
 function setColor() {
@@ -59,62 +109,14 @@ function createColorInputs() {
   for (let i = 0; i < howManyColors; i++) {
     colorsContainer.innerHTML += colorDiv(i + 1);
   }
-  colors = document.querySelectorAll(".color");
+  colorInputs = document.querySelectorAll(".color");
   splitersContainer = document.querySelectorAll(".spliter");
-  colors.forEach((obj) => obj.addEventListener("click", setGradient));
+  colorInputs.forEach((obj) => obj.addEventListener("click", setGradient));
   splitersContainer.forEach((obj) =>
     obj.addEventListener("click", setGradient)
   );
 }
 
-supriseBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  howManyColors = Math.floor(Math.random() * 8 + 2);
-  colorCounter.value = howManyColors;
-  setColor();
-  createColorInputs();
-  for (let i = 0; i < howManyColors; i++) {
-    colors[i].value = randomColor();
-    splitersContainer[i].value = Math.floor(
-      Math.random() * 100 + splitersContainer[i].value
-    );
-  }
-  angleInput.value = Math.floor(Math.random() * 360);
-  setGradient();
-});
-
-generateBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  setGradient();
-});
-
-colorCounter.addEventListener("change", () => {
-  howManyColors = colorCounter.value;
-  createColorInputs();
-  setColor();
-});
-
-radialBtn.addEventListener("click", () => {
-  if (!radialBtn.classList.contains("clicked")) {
-    radialBtn.classList.add("clicked");
-    gradientMode = "linear";
-    angleInputs.forEach((obj) => obj.classList.remove("clicked"));
-  } else {
-    radialBtn.classList.remove("clicked");
-    gradientMode = "radial";
-    angleInputs.forEach((obj) => obj.classList.add("clicked"));
-  }
-  setGradient();
-});
-
-angleInput.addEventListener("click", setGradient);
-
-function setGradient() {
-  arrOfColors = [];
-  for (let i = 0; i < howManyColors; i++) {
-    arrOfColors[i] = colors[i].value;
-    arrOfSplitters[i] = splitersContainer[i].value;
-  }
-  gradientAngle = angleInput.value;
-  doGradient();
+function randomColor() {
+  return "#" + (((1 << 24) * Math.random()) | 0).toString(16);
 }

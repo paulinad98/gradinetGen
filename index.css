@@ -35,35 +35,12 @@ input {
   margin: 20px;
 }
 
-input[type="color"] {
-  border-radius: 5px;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  height: 30px;
-  width: 100px;
-}
-
-input[type="number"] {
-  width: 40px;
-}
-
 .number-of-colors {
   text-align: center;
 }
 
-button {
-  display: block;
-  width: 200px;
-  border: 1px black solid;
-  border-radius: 5em;
-  padding: 0.1em;
-  color: grey;
-  margin: 1em auto;
-}
-
-button:hover {
-  color: #000000;
-  background-color: #ffffff;
+input[type="number"] {
+  width: 40px;
 }
 
 #colors {
@@ -74,24 +51,23 @@ button:hover {
   opacity: 0.8;
 }
 
+input[type="color"] {
+  border-radius: 5px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  height: 30px;
+  width: 100px;
+}
+
 .gradient-mode {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-main {
-  width: 100%;
-}
-
-p {
-  width: 80%;
-  margin: 1em auto;
-  font-size: 1rem;
-  border: 1px solid black;
-  padding: 1em 3em;
-  background-color: rgb(250, 233, 233);
-  color: rgb(240, 89, 67);
+.angle.clicked {
+  color: gray;
+  opacity: 0.4;
 }
 
 .radial {
@@ -109,7 +85,31 @@ p {
   color: gray;
 }
 
-.angle.clicked {
-  color: gray;
-  opacity: 0.4;
+button {
+  display: block;
+  width: 200px;
+  border: 1px black solid;
+  border-radius: 5em;
+  padding: 0.1em;
+  color: grey;
+  margin: 1em auto;
+}
+
+button:hover {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+main {
+  width: 100%;
+}
+
+p {
+  width: 80%;
+  margin: 1em auto;
+  font-size: 1rem;
+  border: 1px solid black;
+  padding: 1em 3em;
+  background-color: rgb(250, 233, 233);
+  color: rgb(240, 89, 67);
 }
