@@ -6,6 +6,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-size: 1rem;
 }
 
 body {
@@ -100,14 +101,11 @@ button:hover {
   background-color: #ffffff;
 }
 
-main {
-  width: 100%;
-}
-
-p {
-  width: 80%;
+.copy-code {
+  width: 80vw;
   margin: 1em auto;
   font-size: 1rem;
+  text-align: center;
   border: 1px solid black;
   padding: 1em 3em;
   background-color: rgb(250, 233, 233);
