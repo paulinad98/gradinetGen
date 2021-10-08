@@ -41,8 +41,8 @@ generateBtn.addEventListener("click", (e) => {
 
 colorCounter.addEventListener("change", () => {
   howManyColors = colorCounter.value;
-  createColorInputs();
   setColor();
+  createColorInputs();
   setGradient();
 });
 
