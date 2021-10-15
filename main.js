@@ -3,9 +3,11 @@ const angleDisplay = document.getElementById("angle-display");
 const angleInputLabels = document.querySelectorAll(".angle");
 const backgroundGradientGrid = document.getElementById("gradient");
 const supriseBtn = document.getElementById("suprise");
-const colorCounter = document.getElementById("count-color");
+const incrementBtn = document.getElementById("increment");
+const decrementBtn = document.getElementById("decrement");
+const cssToCopy = document.getElementById("copied");
 const colorsContainer = document.getElementById("colors");
-const copyCode = document.getElementById("copy-code");
+const copyCodeBtn = document.getElementById("copy-code");
 const radialBtn = document.getElementById("radial");
 const linearBtn = document.getElementById("linear");
 const body = document.querySelector("body");
@@ -24,7 +26,6 @@ setGradient();
 supriseBtn.addEventListener("click", (e) => {
   e.preventDefault();
   numberOfColors = 2;
-  colorCounter.value = numberOfColors;
   setColor();
   createColorInputs();
   for (let i = 0; i < numberOfColors; i++) {
@@ -37,15 +38,20 @@ supriseBtn.addEventListener("click", (e) => {
   setGradient();
 });
 
-colorCounter.addEventListener("input", () => {
-  if (numberOfColors > 1) {
-    numberOfColors = colorCounter.value;
-  } else {
-    numberOfColors = 2;
-  }
+incrementBtn.addEventListener("click", () => {
+  numberOfColors++;
   setColor();
   createColorInputs();
   setGradient();
+});
+
+decrementBtn.addEventListener("click", () => {
+  if (numberOfColors !== 2) {
+    numberOfColors--;
+    setColor();
+    createColorInputs();
+    setGradient();
+  }
 });
 
 radialBtn.addEventListener("click", () => {
@@ -73,6 +79,17 @@ angleInput.addEventListener("input", (e) => {
   setGradient();
 });
 
+copyCodeBtn.addEventListener("click", () => {
+  const copyText = cssToCopy;
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  copyCodeBtn.classList.add("active");
+  setTimeout(() => {
+    copyCodeBtn.classList.remove("active");
+  }, 1000);
+});
+
 function setGradient() {
   arrOfColors = [];
   for (let i = 0; i < numberOfColors; i++) {
@@ -94,7 +111,7 @@ function doGradient() {
   } else {
     body.style.background = `${gradientMode}-gradient(circle ${gradientText})`;
   }
-  copyCode.textContent = `background: ${body.style.background}`;
+  cssToCopy.value = `background: ${body.style.background}`;
 }
 
 function setColor() {
@@ -105,11 +122,9 @@ function setColor() {
 
 function createColorHTML(colorNumber) {
   return `<div>
-                <label for="picker-${colorNumber}">Color ${colorNumber}:</label>
                 <input id="picker-${colorNumber}" type="color" name="color-${colorNumber}" value="${
     arrOfColors[colorNumber - 1]
   }" class="color"/>
-                <label for="split-${colorNumber}">Split:</label>
                 <input id="split-${colorNumber}" type="range" name="split-${colorNumber}"  value="${
     (100 / arrOfColors.length) * colorNumber
   }" min="0" max="100" class="spliter"/>
@@ -130,5 +145,5 @@ function createColorInputs() {
 }
 
 function randomColor() {
-  return "#" + (((1 << 24) * Math.random()) | 0).toString(16);
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
